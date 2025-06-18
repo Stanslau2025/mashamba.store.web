@@ -1,0 +1,808 @@
+body {
+    margin: 0; /* Remove default body margin */
+    padding: 0;
+    box-sizing: border-box; /* Ensures padding is included in width/height */
+}
+
+.screen-frame {
+    max-width: 1200px; /* Set a maximum width */
+    max-height: 800px; /* Set a maximum height */
+    margin: 0 auto; /* Center the frame horizontally */
+    overflow: hidden; /* Hide overflow content */
+    border: 5px solid #333; /* Add a border for visibility */
+    position: relative; /* Position context for absolutely positioned children */
+    padding: 20px; /* Add padding inside the frame */
+    background-color: #fff; /* Background color */
+}
+
+/* Optional: Add styles for responsiveness */
+@media (max-width: 768px) {
+    .screen-frame {
+        max-width: 100%; /* Full width on small screens */
+        height: auto; /* Allow height to adjust automatically */
+    }
+}
+
+/* Body styling */
+body {
+    margin: 0;
+    background-color: #f0f0f0; /* Light background for body */
+    transition: background-color 1s;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    position: relative;
+}
+
+/* Header styling */
+header {
+    background: #ff6600;
+    color: white;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header .container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    position: relative;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #ffcc00;
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after,
+nav ul li a.active::after {
+    width: 100%;
+}
+
+/* Hamburger menu styling */
+.barger-container {
+    display: inline-block;
+    cursor: pointer;
+    position: fixed; /* Make it fixed */
+    top: 20px; /* Distance from the top */
+    right: 20px; /* Distance from the right */
+    z-index: 1000; /* Ensure the menu is above the background */
+}
+
+.bar1, .bar2, .bar3 {
+    width: 40px;
+    height: 6px;
+    background-color: #000000;
+    border-radius: 3px;
+    margin: 6px 0; /* Vertical spacing between bars */
+    transition: 0.5s;
+}
+
+/* Sidebar styling */
+#mySidebar {
+    height: 100%; /* Full-height */
+    width: 0; /* Initially hidden */
+    position: fixed; /* Fixed position */
+    z-index: 9999; /* Ensure it stays on top */
+    top: 0;
+    right: 0; /* Change left to right */
+    background-color: #111; /* Black background */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    transition: 0.44s; /* Transition for smooth open/close */
+    padding-top: 60px; /* Add top padding */
+}
+
+#mySidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #f1f1f1; /* Default color for links */
+  display: block;
+  transition: font-size 0.3s ease, color 0.3s ease;
+}
+
+#mySidebar a:hover, #mySidebar a:focus {
+  font-size: 30px; /* Increase font size on hover */
+  color: yellow; /* Change color to yellow on hover */
+}
+
+
+#mySidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    color: #f1f1f1; /* Bright color for close button */
+}
+/* Overlay Styling */
+#overlay {
+    position: fixed;  /* Make the overlay cover the entire screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Semi-transparent black */
+    z-index: 998; /* Below the sidebar but above the rest of the page */
+    display: none; /* Hidden by default */
+    transition: 0.5s;
+}
+
+
+/* Box-sizing Reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Background styles */
+.pyramid-background {
+    position: relative;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+}
+
+.pyramid-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(45deg, rgba(255, 255, 255, 0.95) 50%, rgba(240, 240, 240, 0.80) 51%) 0 0,
+        linear-gradient(135deg, rgba(255, 255, 255, 0.95) 50%, rgba(240, 240, 240, 0.80) 51%) 0 0,
+        linear-gradient(45deg, rgba(200, 200, 200, 0.6) 25%, transparent 25%) 0 0;
+    background-size: 30px 30px;
+    animation: moveBackground 5s linear infinite;
+    z-index: -4;
+}
+
+.pyramid-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.04);
+    z-index: -3;
+}
+
+.rotating-triangle {
+    position: relative;
+    z-index: 0; /* Pyramid background remains behind everything */
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.73); /* Semi-transparent black */
+    pointer-events: none; /* Allows interactions with content above it */
+    z-index: -2; /* Keeps the overlay below content */
+}
+
+.container,
+.contact-us {
+    position: relative;
+    z-index: 10; /* Content remains above the overlay */
+}
+
+.contact-us form {
+    background-color: white; /* Ensures the form is visually separate */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+.sbody {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9; /* Light background */
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.swrapper {
+  display: flex;              /* Enable flexbox */
+  justify-content: space-between; /* Space between items */
+  align-items: center;        /* Center items vertically */
+  width: 100%;                /* Full width */
+  max-width: 800px;          /* Limit maximum width */
+}
+
+
+
+
+
+
+
+
+.tAC-background {
+  display: flex;               /* Enable flexbox */
+  justify-content: center;     /* Center the button horizontally */
+  align-items: center;         /* Center the button vertically */
+  margin: 20px 0;             /* Add some margin for spacing */
+}
+
+.tadd-comment {
+  box-shadow: 3px 0px 0px rgba(0, 0, 0, 1), /* First shadow (horizontal) */
+              -3.5px 0px 0px rgba(0, 0, 0, 1); /* Second shadow (horizontal) */
+  border-radius: 19px;
+  background-color: rgb(255, 0, 0);
+  border: none;
+  font-size: 30px;
+  color: white;
+  margin-left: 4px;
+}
+
+.tadd-comment:hover {
+  box-shadow: 9px 0px 0px rgba(0, 0, 0, 1), /* First shadow (horizontal) */
+              -10.5px 0px 0px rgba(0, 0, 0, 1); /* Second shadow (horizontal) */
+}
+
+.tadd-comment:active {
+  box-shadow: 9px 0px 0px rgba(255, 0, 0, 1), /* First shadow (horizontal) */
+              -10.5px 0px 0px rgba(255, 0, 0, 1); /* Second shadow (horizontal) */
+  color: black;
+}
+
+
+
+
+
+
+
+
+
+
+/* Existing Triangle */
+.rotating-triangle {
+    position: absolute;
+    top: 60%;
+    left: 90%;
+    width: 1600px;
+    height: 1000px;
+    background-color: rgba(255, 255, 255, 0.70);
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    transform: translate(-50%, -50%) rotate(0deg);
+    animation: rotateTriangle 20s linear infinite;
+    z-index: -1;
+}
+
+/* Keyframes for Triangle A */
+@keyframes rotateTriangle {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Background Animation (if needed) */
+@keyframes moveBackground {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 60px 60px;
+    }
+}
+
+/* Adjust featured books and contact sections */
+#categories, #contact {
+    position: relative;
+    z-index: 1; /* Bring content in front of the background */
+    background: none; /* Make background transparent */
+}
+
+.container {
+    padding: 20px;
+    /* Add any additional styling for the container */
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    background: #ff6600;
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+    margin-top: 60px;
+    overflow: hidden;
+}
+
+.hero h2 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+.hero p {
+    font-size: 1.2em;
+}
+
+/* Button Styles */
+.btn {
+    background: #ff6600;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    position: relative;
+    z-index: 10; /* Ensure button is on top */
+}
+
+.btn:hover {
+    background: #ff3300;
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Featured Books Section */
+.featured-books {
+  padding: 20px;
+  background: #ffffff;
+}
+
+.featured-books .container {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.featured-books h2 {
+  text-align: center;
+  color: #ff6600;       
+      /* MUST HAVE SHADOWS ON THE BACK GROUND */
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.book-card {
+  width: 50%;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.book-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.book-card h3 {
+  margin: 10px 0;
+  color: #333;
+}
+
+.book-card p.price {
+  font-size: 1.5em;
+  color: #ff6600;
+  font-weight: bold;
+}
+
+.book-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+footer {
+  background: #ff6600;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  z-index: 9998;
+}
+
+#contact {
+  padding: 40px 20px;
+  background: #ffffff;
+  position: relative; /* Ensure it's positioned relative to the parent */
+}
+
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.50);
+  position: relative; /* Keep it within the contact container */
+  z-index: 10; /* Ensure it appears above other elements in the same container */
+}
+
+.contact-form label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+.contact-form button {
+  width: 100%;
+  background: #ff6600;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.contact-form button:hover {
+  background: #ff3300;
+  transform: translateY(-2px);
+}
+
+.contact-form button:active {
+  background: #ff6600;
+  transform: translateY(2px);
+}
+
+/* Responsive Design */
+@media only screen and (min-width: 1024px) {
+  .featured-books .container {
+    width: 70%;
+  }
+  .book-card {
+    width: calc(33.333% - 20px);
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .book-card {
+    width: calc(50% - 20px);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .book-card {
+    width: 100%;
+  }
+
+  header .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav ul {
+    margin-top: 10px;
+  }
+}
+/* Triangle Styles */
+.triangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 100px solid rgba(255, 255, 255, 0.2);
+  animation: rotateTriangle 10s infinite linear;
+  opacity: 0.5;
+}
+
+.large-triangle {
+  position: absolute;
+  width: 1000px;
+  height: 1000px;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  border-bottom: 200px solid rgba(255, 255, 255, 0.3);
+  top: -10px;
+  left: -10px;
+  animation: rotateLargeTriangle 10s infinite linear;
+  opacity: 0.5;
+}
+
+.large-triangle-2 {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  border-bottom: 200px solid rgba(255, 255, 255, 0.3);
+  top: -10px;
+  left: -10px;
+  animation: rotateLargeTriangle 10s infinite linear;
+  opacity: 0.5;
+}
+
+.triangle-small {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 40px solid rgba(255, 255, 255, 0.2);
+  bottom: 20px;
+  right: 20px;
+  animation: rotateSmallTriangle 10s infinite linear;
+}
+
+@keyframes rotateTriangle {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes rotateLargeTriangle {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes rotateSmallTriangle {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Positioning triangles randomly */
+.triangle:nth-child(1) { top: 10%; left: 5%; }
+.triangle:nth-child(2) { top: 20%; left: 70%; }
+.triangle:nth-child(3) { top: 50%; left: 15%; }
+.triangle:nth-child(4) { top: 60%; left: 65%; }
+.triangle:nth-child(5) { top: 80%; left: 30%; }
+.triangle:nth-child(6) { top: 15%; left: 50%; }
+.triangle:nth-child(7) { top: 70%; left: 20%; }
+
+/* Media Queries */
+@media only screen and (min-width: 1024px) {
+  .featured-books .container {
+      width: 70%;
+  }
+  .book-card {
+      width: calc(33.333% - 20px);
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .book-card {
+      width: calc(50% - 20px);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .book-card {
+      width: 100%;
+  }
+
+  header .container {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  nav ul {
+      margin-top: 10px;
+  }
+  /* General styling for the about section */
+  .container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center; /* Centers text elements horizontally */
+  }
+
+  /* Style for the image */
+  #about img {
+      display: block;
+      margin: 20px auto; /* Centers the image horizontally */
+      border-radius: 50%; /* Optional: makes the image circular */
+      width: 150px; /* Adjust the size of the image */
+      height: 150px;
+  }
+
+  /* Style for the first paragraph (author name) */
+  #about p:first-of-type {
+      font-weight: bold;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      font-size: 1.2em; /* Adjust the font size if needed */
+  }
+
+  /* General paragraph styling */
+  #about p {
+      line-height: 1.6;
+      text-align: center;
+  }
+}
+/* General Section Styling */
+#about {
+  background: #f0f0f0;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+#about .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#about h2 {
+  color: #ff6600;
+  margin-bottom: 20px;
+  font-size: 2.5em;
+}
+
+/* Author Image Styling */
+#about .author-image-container {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 50%;  /* This makes the image circular */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#about .author-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* Ensures the image covers the container and maintains aspect ratio */
+}
+
+/* Centering Text and List */
+#about p, #about ul {
+  text-align: center;
+  color: #333;
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.1em;
+}
+
+#about .justified-text {
+  text-align: justify;
+  margin-bottom: 20px;
+}
+
+#about ul.justified-text {
+  padding-left: 20px;
+  list-style: none;
+}
+
+#about ul.justified-text li {
+  margin: 10px 0;
+}
+
+/* Responsive Design - Scoped to #about Section */
+@media only screen and (max-width: 1024px) 
+{
+  #about h2 {
+      font-size: 2.2em;
+  }
+  #about .author-image-container {
+      width: 130px;
+      height: 130px;
+  }
+  #about .author-image {
+      width: 100%;
+      height: 100%;
+  }
+  #about .justified-text {
+      font-size: 1em;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #about h2 {
+      font-size: 2em;
+  }
+  #about .author-image-container {
+      width: 120px;
+      height: 120px;
+  }
+  #about .author-image {
+      width: 100%;
+      height: 100%;
+  }
+  #about .justified-text {
+      font-size: 0.95em;
+      line-height: 1.5;
+  }
+  #about ul.justified-text {
+      padding-left: 15px;
+
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #about h2 {
+      font-size: 1.8em;
+      margin-bottom: 10px;
+  }
+  #about .author-image-container {
+      width: 100px;
+      height: 100px;
+  }
+  #about .author-image {
+      width: 100%;
+      height: 100%;
+  }
+  #about .justified-text {
+      font-size: 0.9em;
+      line-height: 1.4;
+      margin-bottom: 15px;
+  }
+  #about ul.justified-text {
+      padding-left: 10px;
+  }
+  #about ul.justified-text li {
+      font-size: 0.9em;
+
+  }
+}
+
+
+
+/* AUTHER IMAGE PROPERTIES ARE UNAVAILABLE  clea*/
+/* "justified-text" IS UNAVAILABL  clea */
